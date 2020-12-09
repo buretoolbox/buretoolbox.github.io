@@ -21,17 +21,17 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-  <Project rdf:about="https://yetus.apache.org">
+  <Project rdf:about="https://buretoolbox.apache.org">
     <created>2015-09-16</created>
     <license rdf:resource="https://spdx.org/licenses/Apache-2.0" />
-    <name>Apache Yetus</name>
-    <homepage rdf:resource="https://yetus.apache.org/" />
-    <asfext:pmc rdf:resource="https://yetus.apache.org/" />
+    <name>Buretoolbox</name>
+    <homepage rdf:resource="https://buretoolbox.apache.org/" />
+    <asfext:pmc rdf:resource="https://buretoolbox.apache.org/" />
     <shortdesc>A collection of libraries and tools that enable contribution and release processes for software projects.</shortdesc>
     <description>A collection of libraries and tools that enable contribution and release processes for software projects.</description>
-    <bug-database rdf:resource="https://issues.apache.org/jira/browse/yetus" />
-    <mailing-list rdf:resource="https://yetus.apache.org/mailinglists/" />
-    <download-page rdf:resource="https://yetus.apache.org/downloads/" />
+    <bug-database rdf:resource="https://issues.apache.org/jira/browse/buretoolbox" />
+    <mailing-list rdf:resource="https://buretoolbox.apache.org/mailinglists/" />
+    <download-page rdf:resource="https://buretoolbox.apache.org/downloads/" />
     <programming-language>Bash</programming-language>
     <programming-language>Java</programming-language>
     <programming-language>Python</programming-language>
@@ -40,8 +40,8 @@
     <category rdf:resource="https://projects.apache.org/category/testing" />
     <repository>
       <GitRepository>
-        <location rdf:resource="https://github.com/apache/yetus.git"/>
-        <browse rdf:resource="https://github.com/apache/yetus"/>
+        <location rdf:resource="https://github.com/apache/buretoolbox.git"/>
+        <browse rdf:resource="https://github.com/apache/buretoolbox"/>
       </GitRepository>
     </repository>
     <maintainer>

@@ -17,23 +17,21 @@
   under the License.
 -->
 
-# Apache Yetus
+# BuReToolbox
 
-Apache Yetus is a collection of libraries and tools that enable
-contribution and release process for software projects.
+This project is the _Bu_ild _Re_lease _Toolbox_. It is a fork of the
+original Apache Yetus project. As such, it is a collection of tools
+that enable contribution and release process for software projects.
 
 ## Components
 
 Here is a list of the major components:
 
-* [Website source](asf-site-src/)
-Holds our documentation, which is presented via [our website](https://yetus.apache.org/).
+* [Website source](site-src/)
+Holds our documentation, which is presented via [our website](https://buretoolbox.com/).
 
-* [Precommit](precommit/)
-Precommit provides robust tools to deal with contributions, including applying patches from a variety of project sources and evaluating them against project norms via a system of plugins. See the [precommit overview](asf-site-src/source/documentation/in-progress/precommit-architecture.html.md) to get started working with precommit.
-
-* [Audience Annotations](audience-annotations-component/)
-Audience Annotations allows projects to use Java Annotations to delineate public and non-public parts of their APIs. It also provides doclets to generate javadocs filtered by the intended audience. Currently builds with Maven 3.2.0+.
+* [Premerge](premerge/)
+Premerge provides robust tools to deal with contributions, including applying patches from a variety of project sources and evaluating them against project norms via a system of plugins. See the [premerge overview](site-src/source/documentation/in-progress/premerge/architecture.html.md) to get started working with premerge.
 
 * [Shelldocs](shelldocs/)
 Shelldocs processes comments on Bash functions for annotations similar to Javadoc. It also includes built-in audience scoping functionality similar to the doclet from Audience Annotations.
@@ -41,19 +39,19 @@ Shelldocs processes comments on Bash functions for annotations similar to Javado
 * [Release Doc Maker](releasedocmaker/)
 Release Doc Maker analyzes Jira and Git information to produce Markdown formatted release notes.
 
-* [yetus-maven-plugin](yetus-maven-plugin/)
-Builds a maven plugin that provides some small utilities for some uncommon maven requirements (such as symlinks) in addition to being mavenized versions of some of the Apache Yetus functionality.
+* [buretoolbox-maven-plugin](buretoolbox-maven-plugin/)
+Builds a maven plugin that provides some small utilities for some uncommon maven requirements (such as symlinks).
 
 ## Building Quickstart
 
-For full instructions on how to build releases and the website, see the [guide to contributing](asf-site-src/source/contribute.html.md) for requirements and instructions.
+For full instructions on how to build releases and the website, see the [guide to contributing](site-src/source/contribute.html.md) for requirements and instructions.
 
 ```bash
 # Launch a Docker container that has all of the project's dependencies
 # and a working build environment
 ./start-build-env.sh
 
-# Build the binary tarball, located in yetus-dist/target/artifacts:
+# Build the binary tarball, located in buretoolbox-dist/target/artifacts:
 mvn clean install
 
 # Build the binary and source tarballs and sign the content:
@@ -70,16 +68,16 @@ mvn clean install -Papache-release -Dgpg.sign=skip
 mvn site site:stage
 ```
 
-After executing one or more of the Apache Maven commands, artifacts will be in `yetus-dist/target/artifacts` or ready for a `mvn deploy`.
+After executing one or more of the Apache Maven commands, artifacts will be in `buretoolbox-dist/target/artifacts` or ready for a `mvn deploy`.
 
 ## Container Quickstart
 
 The project makes available two convenience container images on <https://hub.docker.com> for both tagged releases and for the main branch.  It is highly recommended that casual users use a tagged release so as to not be surprised by incompatible changes that are still rolling through the main branch.
 
-### apache/yetus-base
+### buretoolbox/buretoolbox-base
 
-This image contains all of the tools that Apache Yetus supports. It is intended to be used when the Apache Yetus binaries are running outside of the container to speed up building the actual testing container.
+This image contains all of the tools that buretoolbox supports. It is intended to be used when the buretoolbox binaries are running outside of the container to speed up building the actual testing container.
 
-### apache/yetus
+### buretoolbox/buretoolbox
 
-This image contains all of apache/yetus-base plus a built and installed version of Apache Yetus.  The binaries are in `/usr/bin` and therefore part of the default path.  This image is ideal for CI systems that take a container image as the operating environment or for interactive use.
+This image contains all of apache/buretoolbox-base plus a built and installed version of buretoolbox.  The binaries are in `/usr/bin` and therefore part of the default path.  This image is ideal for CI systems that take a container image as the operating environment or for interactive use.

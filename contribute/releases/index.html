@@ -20,7 +20,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Apache Yetus</title>
+        <title>Buretoolbox</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -45,7 +45,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="img-responsive pull-left" href="/">
-                <img style="max-height: 40px; margin-top: 5px; margin-bottom: 5px;" src="../../assets/img/yetus_logo.png" alt="Apache Yetus logo" />
+                <img style="max-height: 40px; margin-top: 5px; margin-bottom: 5px;" src="/assets/img/buretoolbox_logo.png" alt="Buretoolbox logo" />
             </a>
         </div>
         <div class="navbar-collapse collapse">
@@ -68,13 +68,13 @@
                         </li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="https://issues.apache.org/jira/browse/YETUS"><i class="fa fa-bug"></i> JIRA (Bugs)</a>
                         </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://gitbox.apache.org/repos/asf/yetus.git"><i class="fa fa-code"></i> Source (Apache)</a>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://gitbox.apache.org/repos/asf/buretoolbox.git"><i class="fa fa-code"></i> Source (Apache)</a>
                         </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://github.com/apache/yetus"><i class="fa fa-github-alt"></i> Source (GitHub)</a>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://github.com/apache/buretoolbox"><i class="fa fa-github-alt"></i> Source (GitHub)</a>
                         </li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="/contribute/"><i class="fa fa-code-fork"></i> Contributing</a>
                         </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/ApacheYetus"><i class="fa fa-twitter"></i> @ApacheYetus</a>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/ApacheBuretoolbox"><i class="fa fa-twitter"></i> @ApacheBuretoolbox</a>
                         </li>
                     </ul>
                 </li>
@@ -136,7 +136,7 @@
 
 <!-- /MarkdownTOC -->
 
-<p>The Apache Yetus community encourages all committers to help on driving releases. To that end, this section seeks to outline the tools and process you'll use when managing a release. Note that these are our community norms; they do not supersede foundation policy should the two disagree.</p>
+<p>The Buretoolbox community encourages all committers to help on driving releases. To that end, this section seeks to outline the tools and process you'll use when managing a release. Note that these are our community norms; they do not supersede foundation policy should the two disagree.</p>
 
 <h2 id="dependencies">Dependencies</h2>
 
@@ -144,7 +144,7 @@
 
 <h3 id="committer-access">Committer Access</h3>
 
-<p>While the Yetus project aims to get new contributors involved in as much of the project as possible, ASF policy requires that all <a href="https://www.apache.org/foundation/glossary.html#ReleaseManager">Release Managers be committers on the project</a>. As a practical matter, <a href="https://www.apache.org/dev/release.html#stage">release candidates are staged in a project-specific svn repository that only project committers have write access to</a>.</p>
+<p>While the Buretoolbox project aims to get new contributors involved in as much of the project as possible, ASF policy requires that all <a href="https://www.apache.org/foundation/glossary.html#ReleaseManager">Release Managers be committers on the project</a>. As a practical matter, <a href="https://www.apache.org/dev/release.html#stage">release candidates are staged in a project-specific svn repository that only project committers have write access to</a>.</p>
 
 <h3 id="hardware-you-own-and-physically-control">Hardware You Own and Physically Control</h3>
 
@@ -158,23 +158,15 @@
 
 <h3 id="version-control-system-tools">Version Control System Tools</h3>
 
-<p>In addition to the git tools you normally use to interact with the Yetus project, managing a release also requires a properly configured Apache Subversion installation. This additional tool is because both the staging area for release candidates and the final distribution mechanism for PMC approved releases rely on Subversion.</p>
+<p>In addition to the git tools you normally use to interact with the Buretoolbox project, managing a release also requires a properly configured Apache Subversion installation. This additional tool is because both the staging area for release candidates and the final distribution mechanism for PMC approved releases rely on Subversion.</p>
 
 <p>The Subversion project provides a nice set of pointers to installing on various OSes, in most cases via package managers, on their page <a href="https://subversion.apache.org/packages.html">Apache Subversion Binary Packages</a>. Alternatively, you could start with a source release and manually build the necessary tools by starting at <a href="https://subversion.apache.org/download.cgi">Apache Subversion - Download Source Code</a>.</p>
 
 <h3 id="project-specific-build-tools">Project Specific Build Tools</h3>
 
-<p>To create our convenience binary artifact and the Apache Maven plug-ins, you'll need to build both our project docs and all of the individual components. If you usually only work on one part of the project, say Yetus Precommit, this might require some additional programming languages and tools.</p>
-
-<p>All of these tools should be in the Docker container that is launched by using the <code>./start-build-dev.sh</code> script.  If you wish to build outside of the container (not recommended), you will need:</p>
-
-<ul>
-  <li>Maven 3.2.0+</li>
-  <li>Java 8</li>
-  <li>Python 2.7</li>
-  <li>Ruby 2.x+</li>
-  <li>bash, tar, gzip, gpg, and shasum</li>
-</ul>
+<p>To create our convenience binary artifact and the Apache Maven plug-ins, you'll need to build both our project docs and all of the individual components.<br />
+All of the tools will be in the Docker container that is launched by using the <code>./start-build-dev.sh</code> script. Note that you will need to have a properly<br />
+configured GnuPG and Maven settings.xml setup.</p>
 
 <h2 id="setup">Setup</h2>
 
@@ -186,12 +178,12 @@
 
 <h3 id="ensure-your-public-key-is-in-keys">Ensure Your Public Key is in KEYS</h3>
 
-<p>Like many ASF projects, we provide a single file that downstream folks can use to verify our release artifacts. It's located in the project's distribution area <a href="https://downloads.apache.org/yetus">https://downloads.apache.org/yetus</a>. You can read about this file in the <a href="https://www.apache.org/dev/release-signing">ASF guide to release signing</a> section. If your public key is not already included in <a href="https://downloads.apache.org/yetus/KEYS">the KEYS file</a>, you will need to add it. You can either follow the instructions in the previously mentioned guide or those at the top of the actual KEYS file. In any case, you will need to use Subversion to update the KEYS file in the project's distribution area. Note that this area is writable only by the project PMC. If you are not yet on the PMC, your last step should be providing a patch rather than committing.</p>
+<p>Like many ASF projects, we provide a single file that downstream folks can use to verify our release artifacts. It's located in the project's distribution area <a href="https://downloads.apache.org/buretoolbox">https://downloads.apache.org/buretoolbox</a>. You can read about this file in the <a href="https://www.apache.org/dev/release-signing">ASF guide to release signing</a> section. If your public key is not already included in <a href="https://downloads.apache.org/buretoolbox/KEYS">the KEYS file</a>, you will need to add it. You can either follow the instructions in the previously mentioned guide or those at the top of the actual KEYS file. In any case, you will need to use Subversion to update the KEYS file in the project's distribution area. Note that this area is writable only by the project PMC. If you are not yet on the PMC, your last step should be providing a patch rather than committing.</p>
 
 <p>Example commands:</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>svn co https://dist.apache.org/repos/dist/release/yetus yetus-dist-release
-<span class="nv">$ </span><span class="nb">cd </span>yetus-dist-release
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>svn co https://dist.apache.org/repos/dist/release/buretoolbox buretoolbox-dist-release
+<span class="nv">$ </span><span class="nb">cd </span>buretoolbox-dist-release
 <span class="nv">$ </span><span class="o">(</span>gpg <span class="nt">--list-sigs</span> &lt;your key name&gt; <span class="o">&amp;&amp;</span> gpg <span class="nt">--armor</span> <span class="nt">--export</span> &lt;your key name&gt;<span class="o">)</span> <span class="o">&gt;&gt;</span> KEYS
 <span class="nv">$ </span>svn diff
 <span class="nv">$ </span>svn commit <span class="nt">-m</span> <span class="s2">"Added myself to KEYS."</span>
@@ -202,7 +194,7 @@
 
 <ol>
   <li>Browse to the ASF JIRA instance's "create issue" page: <a href="https://issues.apache.org/jira/secure/CreateIssue!default.jspa">https://issues.apache.org/jira/secure/CreateIssue!default.jspa</a></li>
-  <li>Select "Yetus" for the Project and "Task" for the issue type. Click "Next".</li>
+  <li>Select "Buretoolbox" for the Project and "Task" for the issue type. Click "Next".</li>
   <li>On the next screen, use a subject line like "Release VERSION", with an appropriate version number. Fill in the following fields and click "Create".
     <ul>
       <li>The component should be "website and documentation"</li>
@@ -213,7 +205,7 @@
   </li>
   <li>Next, create a shortened link to the JIRA version's release notes. This link should use the ASF link shortener, <a href="https://s.apache.org/">https://s.apache.org/</a>. To find the appropriate release notes page:
     <ul>
-      <li>Browse to the Yetus JIRA versions page: <a href="https://issues.apache.org/jira/browse/YETUS/?selectedTab=com.atlassian.jira.jira-projects-plugin:versions-panel">https://issues.apache.org/jira/browse/YETUS/?selectedTab=com.atlassian.jira.jira-projects-plugin:versions-panel</a></li>
+      <li>Browse to the Buretoolbox JIRA versions page: <a href="https://issues.apache.org/jira/browse/YETUS/?selectedTab=com.atlassian.jira.jira-projects-plugin:versions-panel">https://issues.apache.org/jira/browse/YETUS/?selectedTab=com.atlassian.jira.jira-projects-plugin:versions-panel</a></li>
       <li>Click on the Name of the release you are managing</li>
       <li>Click on the "Release Notes" button. If it isn't shown, click on the "Summary" button in the left menu</li>
       <li>Copy this URL</li>
@@ -221,12 +213,12 @@
   </li>
   <li>Browse to the ASF URL shortener: <a href="https://s.apache.org/">https://s.apache.org/</a></li>
   <li>Paste the URL into the "URI" field</li>
-  <li>Set the optional key field to 'yetus-_version_-jira'<br />
-For example, on the 0.7.0 release, you would use <code>https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12318920&amp;version=12334330</code> for the URI field and 'yetus-0.7.0-jira' for the key.</li>
+  <li>Set the optional key field to 'buretoolbox-_version_-jira'<br />
+For example, on the 0.7.0 release, you would use <code>https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12318920&amp;version=12334330</code> for the URI field and 'buretoolbox-0.7.0-jira' for the key.</li>
   <li>Finally, you should create a JIRA version that matches the release <em>following</em> the one you are managing. This action is so that folks can continue to work on things that won't make it into the in-progress release while we evaluate candidates.
     <ol>
       <li>Browse to the ASF JIRA project management page for versions: <a href="https://issues.apache.org/jira/plugins/servlet/project-config/YETUS/versions">https://issues.apache.org/jira/plugins/servlet/project-config/YETUS/versions</a></li>
-      <li>Fill in a version one minor version up from the release you're managing. E.g., when managing the 0.7.0 release, fill in 0.3.0.</li>
+      <li>Fill in a version one minor version up from the release you're managing. E.g., when managing the 0.7.0 release, fill in 0.8.0.</li>
       <li>Set a start date of today.</li>
       <li>Click "Add"</li>
     </ol>
@@ -235,76 +227,34 @@ For example, on the 0.7.0 release, you would use <code>https://issues.apache.org
 
 <h3 id="work-in-git">Work in Git</h3>
 
-<p>Once you have an issue to track things, you can create the git branch for staging our release. This separate branch will allow you to polish the release while regular work continues on the main branch. You will need to update main for the next SNAPSHOT version and the branch for the release.</p>
+<p>Once you have an issue to track things, you can create the git branch for staging our release. This separate branch will allow you to polish the release while regular work continues on the main branch. For non-micro releases, you will need to update main for the next SNAPSHOT version and the branch for the release.</p>
 
-<p>Example commands, presuming the release under management is <strong>0.7.0</strong> and the JIRA issue is <strong>YETUS-XXX</strong>:</p>
+<ul>
+  <li>
+    <p>Major Release:</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="c"># Ensure main is up to date</span>
-<span class="nv">$ </span>mvn clean
-<span class="nv">$ </span>git fetch origin
-<span class="nv">$ </span>git status
-<span class="c"># On branch main</span>
-<span class="c"># Your branch is behind 'origin/main' by 6 commits, and can be fast-forwarded.</span>
-<span class="c">#</span>
-nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
-<span class="nv">$ </span>git rebase origin/main
-First, rewinding <span class="nb">head </span>to replay your work on top of it...
-Fast-forwarded main to origin/main.
-<span class="nv">$ </span>git status
-<span class="c"># On branch main</span>
-nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
-<span class="nv">$ </span><span class="c"># create a branch and push without changes</span>
-<span class="nv">$ </span>git checkout <span class="nt">-b</span> YETUS-XXX
-Switched to a new branch <span class="s1">'YETUS-XXX'</span>
-<span class="nv">$ </span>git push origin YETUS-XXX
-<span class="nv">$ </span><span class="c"># find files we need to update for release</span>
-<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-rl</span> <span class="s2">"0.7.0-SNAPSHOT"</span> <span class="k">*</span> 2&gt;/dev/null
-asf-site-src/pom.xml
-audience-annotations-component/audience-annotations/pom.xml
-audience-annotations-component/audience-annotations-jdiff/pom.xml
-audience-annotations-component/pom.xml
-pom.xml
-precommit/pom.xml
-releasedocmaker/pom.xml
-shelldocs/pom.xml
-yetus-dist/pom.xml
-yetus-maven-plugin/pom.xml
-yetus-minimaven-plugin/pom.xml
-</code></pre></div>
-<p>At this point, you should edit the files mentioned above. They must have the version we expect upon a successful release. Search for instances of <em>VERSION-SNAPSHOT</em> and replace with <em>VERSION</em>; e.g., <em>0.7.0-SNAPSHOT</em> should become <em>0.7.0</em>:</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>release/initial-patches.sh <span class="nt">--jira</span><span class="o">=</span>&lt;release JIRA&gt; <span class="nt">--version</span><span class="o">=</span>&lt;X.0.0&gt;
+</code></pre></div>  </li>
+  <li>
+    <p>Minor release:</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>perl <span class="nt">-pi</span> <span class="nt">-e</span> <span class="s1">'s,0.7.0-SNAPSHOT,0.7.0,g'</span> <span class="si">$(</span>find <span class="nb">.</span> <span class="nt">-type</span> f<span class="si">)</span>
-</code></pre></div>
-<p>After you are done, create a branch-specific patch and then prepare to update the main branch.</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>release/initial-patches.sh <span class="nt">--jira</span><span class="o">=</span>&lt;release JIRA&gt;
+</code></pre></div>  </li>
+  <li>
+    <p>Micro release:</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>git add <span class="nt">-p</span>
-<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"YETUS-XXX. Stage version 0.7.0."</span>
-<span class="nv">$ </span>git format-patch <span class="nt">--stdout</span> origin/YETUS-XXX <span class="o">&gt;</span> path/to/patches/YETUS-XXX-YETUS-XXX.1.patch
-<span class="nv">$ </span>git checkout main
-<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-rl</span> <span class="s2">"0.7.0-SNAPSHOT"</span> <span class="k">*</span> 2&gt;/dev/null
-asf-site-src/pom.xml
-audience-annotations-component/audience-annotations/pom.xml
-audience-annotations-component/audience-annotations-jdiff/pom.xml
-audience-annotations-component/pom.xml
-pom.xml
-precommit/pom.xml
-releasedocmaker/pom.xml
-shelldocs/pom.xml
-yetus-dist/pom.xml
-yetus-maven-plugin/pom.xml
-yetus-minimaven-plugin/pom.xml
-</code></pre></div>
-<p>Now update these files, but this time you should update them for the next minor version's SNAPSHOT. e.g., <em>0.7.0-SNAPSHOT</em> should become <em>0.8.0-SNAPSHOT</em>:</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>release/initial-patches.sh <span class="nt">--jira</span><span class="o">=</span>&lt;release JIRA&gt; <span class="nt">--startingbranch</span><span class="o">=</span>rel/&lt;previous micro version&gt;
+</code></pre></div>  </li>
+</ul>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>perl <span class="nt">-pi</span> <span class="nt">-e</span> <span class="s1">'s,0.7.0-SNAPSHOT,0.8.0-SNAPSHOT,g'</span> <span class="si">$(</span>find <span class="nb">.</span> <span class="nt">-type</span> f<span class="si">)</span>
-</code></pre></div>
-<p>After you are done, create a patch.</p>
+<p>These commands will create one or two branches:</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>git add <span class="nt">-p</span>
-<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"YETUS-XXX. bump main version to 0.8.0-SNAPSHOT"</span>
-<span class="nv">$ </span>git format-patch <span class="nt">--stdout</span> origin/main <span class="o">&gt;</span> path/to/patches/YETUS-XXX.1.patch
-</code></pre></div>
-<p>Both of these patch files should be uploaded to your release issue for review. Push them to the repository once the patches get approval.</p>
+<ul>
+  <li>JIRA-release with updated poms that match the release you are working on</li>
+  <li>JIRA-main with updated poms that match the next SNAPSHOT release</li>
+</ul>
+
+<p>Verify these branches are correct and create the necessary PRs.  Once approved, merge to their respective branches.</p>
 
 <h2 id="release-candidates">Release Candidate(s)</h2>
 
@@ -314,67 +264,60 @@ yetus-minimaven-plugin/pom.xml
   <li>Update JIRA version release date. Browse to the JIRA project version management page <a href="https://issues.apache.org/jira/plugins/servlet/project-config/YETUS/versions">https://issues.apache.org/jira/plugins/servlet/project-config/YETUS/versions</a>, mark the version as 'Release', and set the release date. Our generated release notes will use this date.</li>
   <li>Update your <code>${HOME}/.m2/settings.xml</code> file to include the Maven snapshot information as indicated on <a href="https://www.apache.org/dev/publishing-maven-artifacts.html">https://www.apache.org/dev/publishing-maven-artifacts.html</a></li>
   <li>
-    <p>Build release artifacts. You should use our convenience script to create the tarballs and markdown documents for a release. Run the following from the release staging branch and inspect the results:</p>
+    <p>Build release artifacts. Run the following from the <em>release staging branch</em> created by the <code>release/initial-patches.sh</code> script and run these commands:</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>mvn <span class="nt">--batch-mode</span> clean deploy <span class="nt">-Papache-release</span>
-<span class="nv">$ </span>mvn <span class="nt">--batch-mode</span> site site:stage
-<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-lah</span> yetus-dist/target/artifacts/<span class="k">*</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>git checkout YETUS-XXX-release
+<span class="nv">$ </span>./start-build-env.sh
+<span class="o">(</span>container build and eventually a shell <span class="k">in </span>your <span class="nb">source </span>repo<span class="o">)</span>
+<span class="nv">$ </span>release/build-and-sign.sh <span class="nt">--asfrelease</span>
+<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-lah</span> buretoolbox-dist/target/artifacts/<span class="k">*</span>
 </code></pre></div>  </li>
+  <li>Exit the container.</li>
   <li>
     <p>Check out the staging area for release candidates and make a directory for this candidate, somewhere outside of your working directory. Copy the artifacts from the previous step into place. For example, when working on RC1 for the 0.7.0 release</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>svn co <span class="sb">`</span>https://dist.apache.org/repos/dist/dev/yetus/<span class="sb">`</span> yetus-dist-dev
-<span class="nv">$ </span><span class="nb">cd </span>yetus-dist-dev
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>svn co <span class="sb">`</span>https://dist.apache.org/repos/dist/dev/buretoolbox/<span class="sb">`</span> buretoolbox-dist-dev
+<span class="nv">$ </span><span class="nb">cd </span>buretoolbox-dist-dev
 <span class="nv">$ </span><span class="nb">mkdir </span>0.7.0-RC1
 <span class="nv">$ </span><span class="nb">cd </span>0.7.0-RC1
-<span class="nv">$ </span><span class="nb">cp </span>path/to/yetus/target/RELEASENOTES.md path/to/yetus/target/CHANGELOG.md path/to/yetus/target/<span class="k">*</span>.tar.gz <span class="nb">.</span>
-</code></pre></div>  </li>
-  <li>
-    <p>While still in the staging area, sign the artifacts and create the needed checksum files:</p>
-
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="k">for </span>artifact <span class="k">in</span> <span class="k">*</span><span class="p">;</span> <span class="k">do
-   </span><span class="nb">echo</span> <span class="k">${</span><span class="nv">artifact</span><span class="k">}</span>
-   gpg <span class="nt">--use-agent</span> <span class="nt">--armor</span> <span class="nt">--output</span> <span class="s2">"</span><span class="k">${</span><span class="nv">artifact</span><span class="k">}</span><span class="s2">"</span>.asc <span class="nt">--detach-sig</span> <span class="s2">"</span><span class="k">${</span><span class="nv">artifact</span><span class="k">}</span><span class="s2">"</span>
-   gpg <span class="nt">--print-mds</span> <span class="s2">"</span><span class="k">${</span><span class="nv">artifact</span><span class="k">}</span><span class="s2">"</span> <span class="o">&gt;</span><span class="s2">"</span><span class="k">${</span><span class="nv">artifact</span><span class="k">}</span><span class="s2">"</span>.mds
-   shasum <span class="nt">-a</span> 512 <span class="s2">"</span><span class="k">${</span><span class="nv">artifact</span><span class="k">}</span><span class="s2">"</span> <span class="o">&gt;</span><span class="s2">"</span><span class="k">${</span><span class="nv">artifact</span><span class="k">}</span><span class="s2">"</span>.sha512
- <span class="k">done</span>
+<span class="nv">$ </span><span class="nb">cp </span>path/to/buretoolbox/buretoolbox-dist/target/artifacts/<span class="k">*</span> <span class="nb">.</span>
 </code></pre></div>  </li>
   <li>
     <p>Push the release candidate to staging distribution. This will make the artifacts visible for the vote.</p>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">cd</span> ..
 <span class="nv">$ </span>svn add 0.7.0-RC1
-<span class="nv">$ </span>svn commit <span class="nt">-m</span> <span class="s2">"stage Apache Yetus 0.7.0-RC1"</span>
-Afterward, the artifacts should be visible via the web under the same URL used when checking out. In the <span class="k">case</span> of 0.7.0-RC1: &lt;https://dist.apache.org/repos/dist/dev/yetus/0.7.0-RC1/&gt;
+<span class="nv">$ </span>svn commit <span class="nt">-m</span> <span class="s2">"stage Buretoolbox 0.7.0-RC1"</span>
+Afterward, the artifacts should be visible via the web under the same URL used when checking out. In the <span class="k">case</span> of 0.7.0-RC1: &lt;https://dist.apache.org/repos/dist/dev/buretoolbox/0.7.0-RC1/&gt;
 </code></pre></div>  </li>
-  <li>Examine staged maven build. Go to the <a href="https://repository.apache.org/">ASF repository</a> and log in with your asf LDAP credentials. Look for the staging repository with a name that includes "yetus". Clicking on it will give you a link to an "Open" repository. You can examine the structure in the Nexus API while you're logged in. If it looks essentially correct, "Close" the repository. Refreshing and clicking on the repository will give you a link in the Summary tab that other folks can use to interact with the repository.</li>
+  <li>Examine staged maven build. Go to the <a href="https://repository.apache.org/">ASF repository</a> and log in with your asf LDAP credentials. Look for the staging repository with a name that includes "buretoolbox". Clicking on it will give you a link to an "Open" repository. You can examine the structure in the Nexus API while you're logged in. If it looks essentially correct, "Close" the repository. Refreshing and clicking on the repository will give you a link in the Summary tab that other folks can use to interact with the repository.</li>
   <li>Create a short link that should point to some online timezone conversion utility that will point to when the vote will end. ASF votes often use timeanddate.com's Event Time Announcer: <a href="https://www.timeanddate.com/worldclock/fixedform.html">https://www.timeanddate.com/worldclock/fixedform.html</a>.</li>
   <li>
     <p>Call a vote on the release candidate. At this point, you have everything you need to call a vote. Your vote thread must contain "[VOTE]" in the subject line, a link to the candidate staging area you created, a source repository commit hash, and voting rules. It should also contain hashes for the artifacts. Here is an example draft for 0.7.0-RC1, update it as appropriate for your release:</p>
 
-<div class="highlight"><pre class="highlight plaintext"><code> Subject: [VOTE] Apache Yetus 0.7.0-RC1
+<div class="highlight"><pre class="highlight plaintext"><code> Subject: [VOTE] Buretoolbox 0.7.0-RC1
 
  Artifacts are available:
 
- https://dist.apache.org/repos/dist/dev/yetus/0.7.0-RC1/
+ https://dist.apache.org/repos/dist/dev/buretoolbox/0.7.0-RC1/
 
  As of this vote the relevant sha512 hashes are:
  SHA512 (CHANGELOG.md) = 6dbb09360b3116d12aed275d223f43b50a95e80aab1981d5bb61886ceb4b3b57475c976e9465f3fb28daaf62b8cae113b8ee87eae35a212c861fbc434632073b
  SHA512 (RELEASENOTES.md) = 72a12eb96f32d35a7660967caf2ce5261bd7829ddc56962c97c7b1e71cebfa026c055258a9db1b475581ca0a3ae13d9f9651724573cacaaad9972a89ff809875
- SHA512 (yetus-0.7.0-bin.tar.gz) = 28f8c94fb2e22a70674be6070f63badf98e1b022ee25c171fff9629d82ca899fc7eb509ffee2a5c50f2bec10cbb20632fb9fddcab5ebcf5c2511a3ae7edbc56b
- SHA512 (yetus-0.7.0-src.tar.gz) = 316cf36c97b301233a9b163c8b8d7ec47bdd3d042b1821820b8ac917e5668e610ec8c35fd438e45a64e05215b183ce1ad7321065883fb84ccac8b4744a7fb73e
+ SHA512 (buretoolbox-0.7.0-bin.tar.gz) = 28f8c94fb2e22a70674be6070f63badf98e1b022ee25c171fff9629d82ca899fc7eb509ffee2a5c50f2bec10cbb20632fb9fddcab5ebcf5c2511a3ae7edbc56b
+ SHA512 (buretoolbox-0.7.0-src.tar.gz) = 316cf36c97b301233a9b163c8b8d7ec47bdd3d042b1821820b8ac917e5668e610ec8c35fd438e45a64e05215b183ce1ad7321065883fb84ccac8b4744a7fb73e
 
  Source repository commit: 1e8f4588906a51317207092bd97b35687f2e3fa3
- Maven staging repository: https://repository.apache.org/content/repositories/orgapacheyetus-1011
+ Maven staging repository: https://repository.apache.org/content/repositories/orgapacheburetoolbox-1011
 
- Our KEYS file is at: https://downloads.apache.org/yetus/KEYS
+ Our KEYS file is at: https://downloads.apache.org/buretoolbox/KEYS
  All artifacts are signed with my key (DEADBEEF)
 
- JIRA version: https://s.apache.org/yetus-0.7.0-jira
+ JIRA version: https://s.apache.org/buretoolbox-0.7.0-jira
 
  Please take a few minutes to verify the release[1] and vote on releasing it:
 
- [ ] +1 Release this package as Apache Yetus 0.7.0
+ [ ] +1 Release this package as Buretoolbox 0.7.0
  [ ] +0 no opinion
  [ ] -1 Do not release this package because...
 
@@ -384,7 +327,7 @@ Afterward, the artifacts should be visible via the web under the same URL used w
  [1]: https://www.apache.org/info/verification.html
  [2]: https://www.apache.org/foundation/glossary.html#MajorityApproval
  [3]: to find this in your local timezone see:
- https://s.apache.org/yetus-0.7.0-rc1-close
+ https://s.apache.org/buretoolbox-0.7.0-rc1-close
 </code></pre></div>  </li>
   <li>Close the vote after the deadline. Once the deadline in the vote thread passes, tally the vote and post a suitable response that changes the subject line to start with "[RESULT]". If the vote failed, ensure there are issues in JIRA for any problems brought up. When they are closed, repeat the steps for creating a release candidate. If the vote passed, proceed to the <a href="#cleanup">Cleanup section</a></li>
 </ol>
@@ -399,32 +342,32 @@ Afterward, the artifacts should be visible via the web under the same URL used w
 
 <p>For example, if we use the URL from our exemplar VOTE email, the process would look like this:</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>wget <span class="nt">--recursive</span> <span class="nt">--no-parent</span> <span class="nt">--quiet</span> <span class="s1">'https://dist.apache.org/repos/dist/dev/yetus/0.7.0-RC1/'</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>wget <span class="nt">--recursive</span> <span class="nt">--no-parent</span> <span class="nt">--quiet</span> <span class="s1">'https://dist.apache.org/repos/dist/dev/buretoolbox/0.7.0-RC1/'</span>
 <span class="nv">$ </span>find dist.apache.org/ <span class="nt">-type</span> f
 
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/CHANGELOG.md
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/CHANGELOG.md.asc
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/CHANGELOG.md.sha512
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/CHANGELOG.md.mds
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/index.html
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/RELEASENOTES.md
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/RELEASENOTES.md.asc
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/RELEASENOTES.md.sha512
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/RELEASENOTES.md.mds
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/apache-yetus-0.7.0-bin.tar.gz
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/apache-yetus-0.7.0-bin.tar.gz.asc
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/apache-yetus-0.7.0-bin.tar.gz.sha512
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/apache-yetus-0.7.0-bin.tar.gz.mds
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/apache-yetus-0.7.0-src.tar.gz
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/apache-yetus-0.7.0-src.tar.gz.asc
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/apache-yetus-0.7.0-src.tar.gz.sha512
-dist.apache.org//repos/dist/dev/yetus/0.7.0-RC1/apache-yetus-0.7.0-src.tar.gz.mds
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/CHANGELOG.md
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/CHANGELOG.md.asc
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/CHANGELOG.md.sha512
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/CHANGELOG.md.mds
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/index.html
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/RELEASENOTES.md
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/RELEASENOTES.md.asc
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/RELEASENOTES.md.sha512
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/RELEASENOTES.md.mds
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/apache-buretoolbox-0.7.0-bin.tar.gz
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/apache-buretoolbox-0.7.0-bin.tar.gz.asc
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/apache-buretoolbox-0.7.0-bin.tar.gz.sha512
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/apache-buretoolbox-0.7.0-bin.tar.gz.mds
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/apache-buretoolbox-0.7.0-src.tar.gz
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/apache-buretoolbox-0.7.0-src.tar.gz.asc
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/apache-buretoolbox-0.7.0-src.tar.gz.sha512
+dist.apache.org//repos/dist/dev/buretoolbox/0.7.0-RC1/apache-buretoolbox-0.7.0-src.tar.gz.mds
 dist.apache.org//robots.txt
 </code></pre></div>
 <p>Lastly, if you haven't verified a release before, you'll need to download and import the public keys for the project's release managers. The public keys are located in the KEYS file that should have been mentioned in the [VOTE] thread announcement. The specific output of the following commands will vary depending on how many release managers there have been and which keys, if any, you have previously imported.</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="nt">--output</span> KEYS.yetus <span class="nt">--silent</span> <span class="s1">'https://downloads.apache.org/yetus/KEYS'</span>
-<span class="nv">$ </span>gpg <span class="nt">--import</span> KEYS.yetus
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="nt">--output</span> KEYS.buretoolbox <span class="nt">--silent</span> <span class="s1">'https://downloads.apache.org/buretoolbox/KEYS'</span>
+<span class="nv">$ </span>gpg <span class="nt">--import</span> KEYS.buretoolbox
 gpg: key 0D80DB7C: <span class="s2">"Sean Busbey (CODE SIGNING KEY) &lt;busbey@apache.org&gt;"</span> not changed
 gpg: Total number processed: 1
 gpg:              unchanged: 1
@@ -437,18 +380,18 @@ gpg:              unchanged: 1
   <li>
     <p>You MUST make sure each of the signatures matches. As noted in the informational page <a href="https://www.apache.org/info/verification.html">What We Sign</a>, if you don't have the signer's key in your web of trust the output of the verify command will point this out. You should refer to it for guidance. For example, using gpg and taking a fictional source artifact:</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">cd </span>dist.apache.org/repos/dist/dev/yetus/0.7.0-RC1/
-<span class="nv">$ </span>gpg <span class="nt">--verify</span> apache-yetus-0.7.0-src.tar.gz.asc apache-yetus-0.7.0-src.tar.gz
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">cd </span>dist.apache.org/repos/dist/dev/buretoolbox/0.7.0-RC1/
+<span class="nv">$ </span>gpg <span class="nt">--verify</span> apache-buretoolbox-0.7.0-src.tar.gz.asc apache-buretoolbox-0.7.0-src.tar.gz
 gpg: Signature made Fri Dec 11 11:50:56 2015 CST using RSA key ID 0D80DB7C
 gpg: Good signature from <span class="s2">"Sean Busbey (CODE SIGNING KEY) &lt;busbey@apache.org&gt;"</span>
 </code></pre></div>  </li>
   <li>
     <p>You MUST make sure the provided hashes match the provided artifact.</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>gpg <span class="nt">--print-mds</span> apache-yetus-0.7.0-src.tar.gz <span class="o">&gt;</span>apache-yetus-0.7.0-src.tar.gz.my_mds
-<span class="nv">$ </span>diff apache-yetus-0.7.0-src.tar.gz.mds apache-yetus-0.7.0-src.tar.gz.my_mds
-<span class="nv">$ </span>shasum <span class="nt">-a</span> 512 apache-yetus-0.7.0-src.tar.gz <span class="o">&gt;</span>apache-yetus-0.7.0-src.tar.gz.my_sha512
-<span class="nv">$ </span>diff apache-yetus-0.7.0-src.tar.gz.sha512 apache-yetus-0.7.0-src.tar.gz.my_sha512
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>gpg <span class="nt">--print-mds</span> apache-buretoolbox-0.7.0-src.tar.gz <span class="o">&gt;</span>apache-buretoolbox-0.7.0-src.tar.gz.my_mds
+<span class="nv">$ </span>diff apache-buretoolbox-0.7.0-src.tar.gz.mds apache-buretoolbox-0.7.0-src.tar.gz.my_mds
+<span class="nv">$ </span>shasum <span class="nt">-a</span> 512 apache-buretoolbox-0.7.0-src.tar.gz <span class="o">&gt;</span>apache-buretoolbox-0.7.0-src.tar.gz.my_sha512
+<span class="nv">$ </span>diff apache-buretoolbox-0.7.0-src.tar.gz.sha512 apache-buretoolbox-0.7.0-src.tar.gz.my_sha512
 </code></pre></div>  </li>
   <li>You MUST make sure artifacts abide by the ASF Licensing Policy. You should read through <a href="https://www.apache.org/legal/resolved">the ASF Licensing Policy</a>, especially if your vote will be binding. As a quick guide:
     <ul>
@@ -462,24 +405,24 @@ gpg: Good signature from <span class="s2">"Sean Busbey (CODE SIGNING KEY) &lt;bu
   <li>
     <p>You SHOULD make sure the source release artifact corresponds to the referenced commit hash in the [VOTE] thread. (This ASF policy is currently in DRAFT status.) The release tag is how we'll provide long-term provenance information for our downstream users. Since the release's source code artifact will be the canonical representation of the release we vote on, it is essential that it matches the contents of the version control system's tag. Given our example above, you can check this with recursive diff.</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">mkdir </span>apache-yetus-0.7.0-src_unpack
-<span class="nv">$ </span><span class="nb">tar</span> <span class="nt">-C</span> apache-yetus-0.7.0-src_unpack <span class="nt">-xzf</span> apache-yetus-0.7.0-src.tar.gz
-<span class="nv">$ </span>git clone <span class="nt">--single-branch</span> <span class="nt">--depth</span><span class="o">=</span>1 <span class="nt">--branch</span> YETUS-585 <span class="s1">'https://github.com/apache/yetus.git'</span> apache-yetus-0.7.0-RC1-tag
-<span class="nv">$ </span>diff <span class="nt">-r</span> apache-yetus-0.7.0-RC1-tag apache-yetus-0.7.0-src_unpack/yetus-project-0.7.0
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">mkdir </span>apache-buretoolbox-0.7.0-src_unpack
+<span class="nv">$ </span><span class="nb">tar</span> <span class="nt">-C</span> apache-buretoolbox-0.7.0-src_unpack <span class="nt">-xzf</span> apache-buretoolbox-0.7.0-src.tar.gz
+<span class="nv">$ </span>git clone <span class="nt">--single-branch</span> <span class="nt">--depth</span><span class="o">=</span>1 <span class="nt">--branch</span> YETUS-585 <span class="s1">'https://github.com/apache/buretoolbox.git'</span> apache-buretoolbox-0.7.0-RC1-tag
+<span class="nv">$ </span>diff <span class="nt">-r</span> apache-buretoolbox-0.7.0-RC1-tag apache-buretoolbox-0.7.0-src_unpack/buretoolbox-project-0.7.0
 <span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
 0
 </code></pre></div>  </li>
   <li>
     <p>You MUST make sure any non-source artifacts can be derived from the source artifact. Since the source artifact is the canonical representation of our release, any other artifacts we distribute must be just for the convenience of our downstream users. As such, one must be able to derive them from the source artifact. Currently, you can generate all of the artifacts we distribute for convenience using the same commands used to create the release artifacts.</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">mkdir </span>apache-yetus-0.7.0-src_unpack
-<span class="nv">$ </span><span class="nb">tar</span> <span class="nt">-C</span> apache-yetus-0.7.0-src_unpack <span class="nt">-xzf</span> apache-yetus-0.7.0-src.tar.gz
-<span class="nv">$ </span><span class="nb">cd </span>apache-yetus-0.7.0-src_unpack/yetus-project-0.7.0
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">mkdir </span>apache-buretoolbox-0.7.0-src_unpack
+<span class="nv">$ </span><span class="nb">tar</span> <span class="nt">-C</span> apache-buretoolbox-0.7.0-src_unpack <span class="nt">-xzf</span> apache-buretoolbox-0.7.0-src.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>apache-buretoolbox-0.7.0-src_unpack/buretoolbox-project-0.7.0
 <span class="nv">$ </span>mvn clean <span class="nb">install</span>
 </code></pre></div>  </li>
 </ol>
 
-<p>This will create a <code>yetus-dist/target/</code> directory that contains the tarball binary distribution files.</p>
+<p>This will create a <code>buretoolbox-dist/target/</code> directory that contains the tarball binary distribution files.</p>
 
 <h3 id="community-recommended-checks">Community recommended checks</h3>
 
@@ -552,13 +495,13 @@ gpg: Good signature from <span class="s2">"Sean Busbey (CODE SIGNING KEY) &lt;bu
 
     <span class="o">||</span> Subsystem <span class="o">||</span> Report/Notes <span class="o">||</span>
     <span class="o">============================================================================</span>
-    | Docker | <span class="nv">Client</span><span class="o">=</span>1.9.1 <span class="nv">Server</span><span class="o">=</span>1.9.1 Image:yetus/hbase:date2016-02-11 |
+    | Docker | <span class="nv">Client</span><span class="o">=</span>1.9.1 <span class="nv">Server</span><span class="o">=</span>1.9.1 Image:buretoolbox/hbase:date2016-02-11 |
     | JIRA Patch URL | https://issues.apache.org/jira/secure/attachment/12787466/HBASE-1772.patch |
     | JIRA Issue | HBASE-15198 |
     | Optional Tests |  asflicense  javac  javadoc  unit  findbugs  hadoopcheck  hbaseanti  checkstyle  compile  |
     | <span class="nb">uname</span> | Linux 67e02eb9aeea 3.13.0-36-lowlatency <span class="c">#63-Ubuntu SMP PREEMPT Wed Sep 3 21:56:12 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux |</span>
     | Build tool | maven |
-    | Personality | /testptch/patchprocess/precommit/personality/hbase.sh |
+    | Personality | /testptch/patchprocess/premerge/personality/hbase.sh |
     | git revision | main / 81a6fff |
     | findbugs | v2.0.1 |
     | findbugs | /testptch/patchprocess/branch-findbugs-hbase-client-warnings.html |
@@ -571,14 +514,14 @@ gpg: Good signature from <span class="s2">"Sean Busbey (CODE SIGNING KEY) &lt;bu
     | unit | /testptch/patchprocess/patch-unit-hbase-server-jdk1.7.0_95.txt |
     | unit <span class="nb">test </span>logs |  /testptch/patchprocess/patch-unit-hbase-server-jdk1.8.0_72.txt /testptch/patchprocess/patch-unit-hbase-server-jdk1.7.0_95.txt |
     | modules | C: hbase-client hbase-server U: <span class="nb">.</span> |
-    | Powered by | Apache Yetus 0.7.0   http://yetus.apache.org |
+    | Powered by | Buretoolbox 0.7.0   http://buretoolbox.apache.org |
 </code></pre></div>  </li>
   <li>
     <p>Test Audience Annotations. If you have a downstream project that relies on the audience annotations project, you should be able to install the jars locally and test with the updated version.</p>
 
-<div class="highlight"><pre class="highlight shell"><code> <span class="nv">$ </span><span class="nb">mkdir </span>apache-yetus-0.7.0-src_unpack
- <span class="nv">$ </span><span class="nb">tar</span> <span class="nt">-C</span> apache-yetus-0.7.0-src_unpack <span class="nt">-xzf</span> apache-yetus-0.7.0-src.tar.gz
- <span class="nv">$ </span><span class="nb">cd </span>apache-yetus-0.7.0-src_unpack/yetus-0.7.0
+<div class="highlight"><pre class="highlight shell"><code> <span class="nv">$ </span><span class="nb">mkdir </span>apache-buretoolbox-0.7.0-src_unpack
+ <span class="nv">$ </span><span class="nb">tar</span> <span class="nt">-C</span> apache-buretoolbox-0.7.0-src_unpack <span class="nt">-xzf</span> apache-buretoolbox-0.7.0-src.tar.gz
+ <span class="nv">$ </span><span class="nb">cd </span>apache-buretoolbox-0.7.0-src_unpack/buretoolbox-0.7.0
  <span class="nv">$ </span>mvn <span class="nt">--batch-mode</span> <span class="nb">install</span>
  ...SNIP...
  <span class="o">[</span>INFO] <span class="nt">------------------------------------------------------------------------</span>
@@ -606,57 +549,59 @@ gpg: Good signature from <span class="s2">"Sean Busbey (CODE SIGNING KEY) &lt;bu
 
 <p>Once a release candidate obtains majority approval from the PMC, there are several final maintenance tasks you must perform to close out the release.</p>
 
+<h3 id="core-release-tasks">Core Release Tasks</h3>
+
 <ol>
-  <li>Create shortcut links to the vote thread (e.g., <a href="https://s.apache.org/yetus-0.7.0-rc1-vote">https://s.apache.org/yetus-0.7.0-rc1-vote</a>) and the result (e.g., <a href="https://s.apache.org/yetus-0.7.0-vote-passes">https://s.apache.org/yetus-0.7.0-vote-passes</a>) that point to the archives on mail-archives.apache.org.  Be aware that it may take several hours for the archive to get the posts that need to be referenced.</li>
+  <li>Create shortcut links to the vote thread (e.g., <a href="https://s.apache.org/buretoolbox-0.7.0-rc1-vote">https://s.apache.org/buretoolbox-0.7.0-rc1-vote</a>) and the result (e.g., <a href="https://s.apache.org/buretoolbox-0.7.0-vote-passes">https://s.apache.org/buretoolbox-0.7.0-vote-passes</a>) that point to the archives on mail-archives.apache.org.  Be aware that it may take several hours for the archive to get the posts that need to be referenced.</li>
   <li>
     <p>Produce a signed release tag. You should create a signed tag and push it to the asf repo. The tag's message should include ASF-shortened links to the vote and results. It should be named 'rel/<em>version</em>' so that it will be immutable due to ASF infra's git configuration. Presuming we're working on the 0.7.0 release and the RC1 example above has passed:</p>
 
 <div class="highlight"><pre class="highlight plaintext"><code> $ git config --global user.signingkey &lt;your-key-id&gt; # if you've never configured
  $ git tag --sign rel/0.7.0 1e8f4588906a51317207092bd97b35687f2e3fa3  Example commit message:
 
- YETUS-XXX. tag Apache Yetus 0.7.0 release.
+ YETUS-XXX. tag Buretoolbox 0.7.0 release.
 
- vote thread: https://s.apache.org/yetus-0.7.0-rc1-vote
+ vote thread: https://s.apache.org/buretoolbox-0.7.0-rc1-vote
 
- results: https://s.apache.org/yetus-0.7.0-vote-passes  Then push:
+ results: https://s.apache.org/buretoolbox-0.7.0-vote-passes  Then push:
 
  $ git push origin rel/0.7.0
 </code></pre></div>  </li>
-  <li>Add the release to the ASF reporter tool. To make our project reports for the ASF Board easier, you should include the release in the <a href="https://reporter.apache.org/addrelease.html?yetus">Apache Committee Report Helper website</a>. Be sure to use the date release artifacts first were pushed to the distribution area, which should be the same release date as in JIRA. Note that this website is only available to PMC members. If you are not yet in the PMC, please ask them to add the release information.  Additionally, it will not let you set a future date.</li>
   <li>
-    <p>Move release artifacts to the distribution area. The release officially happens once the artifacts are pushed to the ASF distribution servers. From this server, the artifacts will automatically be copied to the long-term archive as well as the various mirrors that will be used by downstream users. These must be <em>exactly</em> the artifacts from the RC that passed. Please note that currently, only Yetus PMC members have write access to this space. If you are not yet on the PMC, please ask the PMC to post the artifacts.</p>
+    <p>Move release artifacts to the distribution area. The release officially happens once the artifacts are pushed to the ASF distribution servers. From this server, the artifacts will automatically be copied to the long-term archive as well as the various mirrors that will be used by downstream users. These must be <em>exactly</em> the artifacts from the RC that passed. Please note that currently, only Buretoolbox PMC members have write access to this space. If you are not yet on the PMC, please ask the PMC to post the artifacts.</p>
 
-<div class="highlight"><pre class="highlight plaintext"><code> $ svn co https://dist.apache.org/repos/dist/release/yetus/ yetus-dist-release
- $ cd yetus-dist-release
+<div class="highlight"><pre class="highlight plaintext"><code> $ svn co https://dist.apache.org/repos/dist/release/buretoolbox/ buretoolbox-dist-release
+ $ cd buretoolbox-dist-release
  $ mkdir 0.7.0
- $ cp path/to/yetus-dist-dev/0.7.0-RC1/* 0.7.0
+ $ cp path/to/buretoolbox-dist-dev/0.7.0-RC1/* 0.7.0
  $ svn add 0.7.0
- $ svn commit -m "Publish Apache Yetus 0.7.0"  It may take up to 24 hours for the artifacts to make their way to the various mirrors. You should not announce the release until after this period.
+ $ svn commit -m "Publish Buretoolbox 0.7.0"  It may take up to 24 hours for the artifacts to make their way to the various mirrors. You should not announce the release until after this period.
 </code></pre></div>  </li>
+  <li>Add the release to the ASF reporter tool. To make our project reports for the ASF Board easier, you should include the release in the <a href="https://reporter.apache.org/addrelease.html?buretoolbox">Apache Committee Report Helper website</a>. Be sure to use the date release artifacts first were pushed to the distribution area, which should be the same release date as in JIRA. Note that this website is only available to PMC members. If you are not yet in the PMC, please ask them to add the release information.  Additionally, it will not let you set a future date.</li>
   <li>
     <p>Remove candidates from the staging area. Once you have moved the artifacts into the distribution area, they no longer need to be in the staging area and should be cleaned up as a courtesy to future release managers.</p>
 
-<div class="highlight"><pre class="highlight plaintext"><code> $ svn co https://dist.apache.org/repos/dist/dev/yetus/ yetus-dist-dev
- $ cd yetus-dist-dev
+<div class="highlight"><pre class="highlight plaintext"><code> $ svn co https://dist.apache.org/repos/dist/dev/buretoolbox/ buretoolbox-dist-dev
+ $ cd buretoolbox-dist-dev
  $ svn rm 0.7.0-RC*
- D         0.7.0-RC1/apache-yetus-0.7.0-src.tar.gz.sha512
- D         0.7.0-RC1/apache-yetus-0.7.0-bin.tar.gz.asc
+ D         0.7.0-RC1/apache-buretoolbox-0.7.0-src.tar.gz.sha512
+ D         0.7.0-RC1/apache-buretoolbox-0.7.0-bin.tar.gz.asc
  D         0.7.0-RC1/RELEASENOTES.md
  D         0.7.0-RC1/CHANGELOG.md.mds
  D         0.7.0-RC1/CHANGELOG.md.sha512
- D         0.7.0-RC1/apache-yetus-0.7.0-src.tar.gz
+ D         0.7.0-RC1/apache-buretoolbox-0.7.0-src.tar.gz
  D         0.7.0-RC1/RELEASENOTES.md.asc
- D         0.7.0-RC1/apache-yetus-0.7.0-bin.tar.gz.mds
- D         0.7.0-RC1/apache-yetus-0.7.0-bin.tar.gz.sha512
- D         0.7.0-RC1/apache-yetus-0.7.0-src.tar.gz.asc
+ D         0.7.0-RC1/apache-buretoolbox-0.7.0-bin.tar.gz.mds
+ D         0.7.0-RC1/apache-buretoolbox-0.7.0-bin.tar.gz.sha512
+ D         0.7.0-RC1/apache-buretoolbox-0.7.0-src.tar.gz.asc
  D         0.7.0-RC1/CHANGELOG.md
  D         0.7.0-RC1/RELEASENOTES.md.mds
  D         0.7.0-RC1/CHANGELOG.md.asc
  D         0.7.0-RC1/RELEASENOTES.md.sha512
- D         0.7.0-RC1/apache-yetus-0.7.0-bin.tar.gz
- D         0.7.0-RC1/apache-yetus-0.7.0-src.tar.gz.mds
+ D         0.7.0-RC1/apache-buretoolbox-0.7.0-bin.tar.gz
+ D         0.7.0-RC1/apache-buretoolbox-0.7.0-src.tar.gz.mds
  D         0.7.0-RC1
- $ svn commit -m "cleaning up release candidates from Apache Yetus 0.7.0 release process."
+ $ svn commit -m "cleaning up release candidates from Buretoolbox 0.7.0 release process."
  Deleting       0.7.0-RC1
 
  Committed revision 1772.
@@ -666,53 +611,17 @@ gpg: Good signature from <span class="s2">"Sean Busbey (CODE SIGNING KEY) &lt;bu
   <li>Mark JIRA version as released. Browse to the <a href="https://issues.apache.org/jira/plugins/servlet/project-config/YETUS/versions">project version management page for the YETUS JIRA tracker</a>. Mouse over the version you are managing, click on the gear in the far right and select Release.</li>
   <li>Delete staging branch. Now that there is an immutable tag for the release, all commits leading up to that release will be maintained by git. Should we need a future maintenance release after this version, we can reestablish the branch based off of the release tag.<br />
      $ git push origin :YETUS-XXX</li>
-  <li>
-    <p>Update the Mac OS X Homebrew Formula:</p>
-
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>vim Formula/yetus.rb
-<span class="nv">$ </span><span class="c"># change URL point to the new version</span>
-<span class="nv">$ </span><span class="c"># update the sha256. e.g., shasum -a 256 bin.gz</span>
-<span class="nv">$ </span><span class="c"># test the formula:</span>
-<span class="nv">$ </span>brew <span class="nb">install</span> <span class="nt">--build-from-source</span> Formula/yetus.rb
- <span class="c"># or if you already have it installed:</span>
-<span class="nv">$ </span>brew upgrade <span class="nt">--build-from-source</span> Formula/yetus.rb
-</code></pre></div>  </li>
-  <li>
-    <p>Update the documentation in the git main branch for the new release.  Remove the oldest release and add the latest.</p>
-
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">cd </span>asf-site-src
-<span class="nv">$ </span><span class="c"># Add the release to the releases data file</span>
-<span class="nv">$ </span>vim data/versions.yml
-<span class="nv">$ </span>vim data/htaccess.yml
-<span class="nv">$ </span>vim pom.xml
-<span class="nv">$ </span><span class="c"># add the two stanzas</span>
-<span class="nv">$ </span>git add <span class="nt">-p</span>
-<span class="nv">$ </span>git add asf-site-src/pom.xml
-<span class="nv">$ </span>git commit
-</code></pre></div>
-    <ul>
-      <li>Example commit message:</li>
-    </ul>
-
-<div class="highlight"><pre class="highlight plaintext"><code>YETUS-XXX. add release 0.7.0.
-
-- list in releases
-- remove 0.4.0, add 0.7.0 to pom.xml
-</code></pre></div>  </li>
-  <li>You should then post this patch for review. Once you've gotten feedback, it's fine to push the patch to the ASF source repo immediately so long as the updated website is not published.</li>
-  <li>Publish website updates. After the 24 hour window needed for the release artifacts to make their way to the variety of mirrors, you should render the website and publish it using the instructions found in <a href="../website">Maintaining the Yetus Website</a>.</li>
-  <li>Verify that https://yetus.apache.org/latest.tgz and https://yetus.apache.org/latest.tgz.asc download the newly released version.</li>
   <li>Remove old releases from the distribution area. The ASF distribution area should only contain the most recent release for actively developed branches If your release is a maintenance release, delete the prior release. If your release marks the end of maintenance for an earlier minor or major release line, you should delete those versions from the distribution area.</li>
   <li>
     <p>Draft an announcement email. The announcement email should briefly describe our project and provide links to our artifacts and documentation. For example,<br />
-     Subject: [ANNOUNCE] Apache Yetus 0.7.0 release</p>
+     Subject: [ANNOUNCE] Buretoolbox 0.7.0 release</p>
 
-<div class="highlight"><pre class="highlight plaintext"><code> Apache Yetus 0.7.0 Released!
+<div class="highlight"><pre class="highlight plaintext"><code> Buretoolbox 0.7.0 Released!
 
- The Apache Software Foundation and the Apache Yetus Project are pleased to
- announce the release of version 0.7.0 of Apache Yetus.
+ The Apache Software Foundation and the Buretoolbox Project are pleased to
+ announce the release of version 0.7.0 of Buretoolbox.
 
- Apache Yetus is a collection of libraries and tools that enable contribution
+ Buretoolbox is a collection of libraries and tools that enable contribution
  and release processes for software projects.  It provides a robust system
  for automatically checking new contributions against a variety of community
  accepted requirements, the means to document a well defined supported
@@ -727,51 +636,128 @@ gpg: Good signature from <span class="s2">"Sean Busbey (CODE SIGNING KEY) &lt;bu
 
  To download, please choose a mirror by visiting:
 
-     https://yetus.apache.org/downloads/
+     https://buretoolbox.apache.org/downloads/
 
  The relevant checksums files are available at:
 
-     https://downloads.apache.org/yetus/0.7.0/apache-yetus-0.7.0-src.tar.gz.sha512
-     https://downloads.apache.org/yetus/0.7.0/apache-yetus-0.7.0-src.tar.gz.mds
-     https://downloads.apache.org/yetus/0.7.0/apache-yetus-0.7.0-bin.tar.gz.sha512
-     https://downloads.apache.org/yetus/0.7.0/apache-yetus-0.7.0-bin.tar.gz.mds
+     https://downloads.apache.org/buretoolbox/0.7.0/apache-buretoolbox-0.7.0-src.tar.gz.sha512
+     https://downloads.apache.org/buretoolbox/0.7.0/apache-buretoolbox-0.7.0-src.tar.gz.mds
+     https://downloads.apache.org/buretoolbox/0.7.0/apache-buretoolbox-0.7.0-bin.tar.gz.sha512
+     https://downloads.apache.org/buretoolbox/0.7.0/apache-buretoolbox-0.7.0-bin.tar.gz.mds
 
  Project member signature keys can be found at
 
-    https://downloads.apache.org/yetus/KEYS
+    https://downloads.apache.org/buretoolbox/KEYS
 
  PGP signatures are available at:
 
-     https://downloads.apache.org/yetus/0.7.0/apache-yetus-0.7.0-src.tar.gz.asc
-     https://downloads.apache.org/yetus/0.7.0/apache-yetus-0.7.0-bin.tar.gz.asc
+     https://downloads.apache.org/buretoolbox/0.7.0/apache-buretoolbox-0.7.0-src.tar.gz.asc
+     https://downloads.apache.org/buretoolbox/0.7.0/apache-buretoolbox-0.7.0-bin.tar.gz.asc
 
  The list of changes included in this release and release notes can be browsed at:
 
-     https://yetus.apache.org/documentation/0.7.0/CHANGELOG/
-     https://yetus.apache.org/documentation/0.7.0/RELEASENOTES/
+     https://buretoolbox.apache.org/documentation/0.7.0/CHANGELOG/
+     https://buretoolbox.apache.org/documentation/0.7.0/RELEASENOTES/
 
  Documentation for this release is at:
 
-     https://yetus.apache.org/documentation/0.7.0/
+     https://buretoolbox.apache.org/documentation/0.7.0/
 
- On behalf of the Apache Yetus team, thanks to everyone who helped with this
+ On behalf of the Buretoolbox team, thanks to everyone who helped with this
  release!
 
  Questions, comments, and bug reports are always welcome on
 
-     dev@yetus.apache.org
+     dev@buretoolbox.apache.org
 
  --
  Meg Smith
- Apache Yetus PMC  If you'd like feedback on the draft, feel free to post it for review on your release issue.
+ Buretoolbox PMC  If you'd like feedback on the draft, feel free to post it for review on your release issue.
 </code></pre></div>  </li>
-  <li>Send announcement emails. After the 24 hour window needed for the release artifacts to make their way to the variety of mirrors, you should send the announcement email. The email should come from your apache.org email address and at a minimum should go to the dev@yetus.apache.org list. For details see <a href="https://www.apache.org/dev/release.html#release-announcements">the ASF Release Policy section How Should Releases Be Announced?</a>. Additionally, you may want to send the announcement to the development lists of downstream projects we know are using Yetus components.</li>
+  <li>Wait 24 hours for mirrors to get properly updated.</li>
+</ol>
+
+<h3 id="documentation">Documentation</h3>
+
+<ol>
   <li>
-    <p>Send tweet. Once the message to dev@yetus.apache.org has made it to the public archive, you should draft a tweet with a link to the announcement. You should use the ASF link shortener and a descriptive name. For example, the 0.7.0 release could use</p>
+    <p>Update the documentation in the git main branch for the new release.  Remove the oldest release and add the latest.</p>
 
-<div class="highlight"><pre class="highlight plaintext"><code> Apache Yetus 0.7.0 has been released:
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>release/update-doc-versions.sh <span class="nt">--version</span><span class="o">=</span>&lt;x.y.z <span class="nt">--</span> version WITHOUT the rel/!&gt;
+<span class="nv">$ </span>git add <span class="nt">-p</span>
+<span class="nv">$ </span>git add asf-site-src/pom.xml
+<span class="nv">$ </span>git commit
+</code></pre></div>
+    <ul>
+      <li>Example commit message:</li>
+    </ul>
 
- https://s.apache.org/yetus-0.7.0-announce  This tweet should come from the official [@ApacheYetus](https://twitter.com/ApacheYetus/) account. Currently, only PMC members have access to it. If you are not yet on the PMC, please ask for the PMC to post the tweet once your email is available in the archives.
+<div class="highlight"><pre class="highlight plaintext"><code>YETUS-XXX. add release 0.7.0.
+
+- list in releases
+- remove 0.4.0, add 0.7.0 to pom.xml
+</code></pre></div>  </li>
+  <li>You should then post this patch for review. Once you've gotten feedback, it's fine to push the patch to the ASF source repo immediately so long as the updated website is not published.</li>
+  <li>24 hours after the distribution repo has been updated, publish website updates. See <a href="../website">Maintaining the Buretoolbox Website</a>.</li>
+  <li>Verify that https://buretoolbox.apache.org/latest.tgz and https://buretoolbox.apache.org/latest.tgz.asc download the newly released version.</li>
+</ol>
+
+<h3 id="homebrew">Homebrew</h3>
+
+<p>24 Hours after the distribution repo has been updated, update Homebrew to point to the new release:</p>
+
+<ol>
+  <li>Update the <code>buretoolbox-homebrew</code> repo by using the release script:</li>
+</ol>
+
+<div class="highlight"><pre class="highlight shell"><code>  <span class="nv">$ </span>./release.sh YETUS-XXX &lt;x.y.z <span class="nt">--</span> version WITHOUT the rel/!&gt;
+</code></pre></div>
+<ol>
+  <li>Test the formula:</li>
+</ol>
+
+<div class="highlight"><pre class="highlight shell"><code>   <span class="nv">$ </span><span class="c"># test the formula:</span>
+   <span class="nv">$ </span>brew <span class="nb">install</span> <span class="nt">--build-from-source</span> Formula/buretoolbox.rb
+    <span class="c"># or if you already have it installed:</span>
+   <span class="nv">$ </span>brew upgrade <span class="nt">--build-from-source</span> Formula/buretoolbox.rb
+</code></pre></div>
+<ol>
+  <li>If all looks good, push it live.</li>
+</ol>
+
+<h3 id="github-marketplace-action">Github Marketplace Action</h3>
+
+<p>24 Hours after the distribution repo has been updated, update the Github Marketplace.</p>
+
+<ol>
+  <li>Update the <code>buretoolbox-test-patch-action</code> repo by using the release script to create a branch which will then tag that branch:</li>
+</ol>
+
+<div class="highlight"><pre class="highlight shell"><code>  <span class="nv">$ </span>./release.sh YETUS-XXX &lt;x.y.z <span class="nt">--</span> version WITHOUT the rel/!&gt;
+</code></pre></div>
+<ol>
+  <li>Verify the branch and the tag match and that the container version matches the Buretoolbox release.</li>
+  <li>Go to <a href="https://github.com/aw-was-here/buretoolbox-test-patch-action/releases/new?marketplace=true">Draft a release</a></li>
+  <li>Type the tag that you just pushed into the 'tag' box.</li>
+  <li>Use categories 'Code quality' and 'Continuous integration'</li>
+  <li>Release Title should reflect the version</li>
+  <li>Describe this release should be a cut-down version of the announcement email (drop SHA and direct download links. main page, github actions, and release notes should be mentioned)</li>
+  <li>Mark 'This is a pre-release'</li>
+  <li>Verify everything looks good.</li>
+  <li>Publish release</li>
+</ol>
+
+<h3 id="make-it-official">Make it Official</h3>
+
+<ol>
+  <li>Did you wait 24 hours for the release artifacts to get everywhere?</li>
+  <li>Send announcement emails. The email should come from your apache.org email address and at a minimum should go to the dev@buretoolbox.apache.org list. For details see <a href="https://www.apache.org/dev/release.html#release-announcements">the ASF Release Policy section How Should Releases Be Announced?</a>. Additionally, you may want to send the announcement to the development lists of downstream projects we know are using Buretoolbox components.</li>
+  <li>
+    <p>Send tweet. Once the message to dev@buretoolbox.apache.org has made it to the public archive, you should draft a tweet with a link to the announcement. You should use the ASF link shortener and a descriptive name. For example, the 0.7.0 release could use</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> Buretoolbox 0.7.0 has been released:
+
+ https://s.apache.org/buretoolbox-0.7.0-announce  This tweet should come from the official [@ApacheBuretoolbox](https://twitter.com/ApacheBuretoolbox/) account. Currently, only PMC members have access to it. If you are not yet on the PMC, please ask for the PMC to post the tweet once your email is available in the archives.
 </code></pre></div>  </li>
 </ol>
 
@@ -783,7 +769,7 @@ gpg: Good signature from <span class="s2">"Sean Busbey (CODE SIGNING KEY) &lt;bu
         <div class="row-fluid">
             <div class="span12 text-left">
               <div class="span12">
-                Copyright 2008-2020 <a href="https://www.apache.org/">Apache Software Foundation</a>. Licensed under the <a href="https://www.apache.org/licenses/">Apache License v2.0</a>. Apache Yetus and the Apache feather logo are trademarks of The Apache Software Foundation.
+                Copyright 2008-2020 <a href="https://www.apache.org/">Apache Software Foundation</a>. Licensed under the <a href="https://www.apache.org/licenses/">Apache License v2.0</a>. Buretoolbox and the Apache feather logo are trademarks of The Apache Software Foundation.
               </div>
             </div>
 

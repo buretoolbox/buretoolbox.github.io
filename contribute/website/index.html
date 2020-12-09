@@ -20,7 +20,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Apache Yetus</title>
+        <title>Buretoolbox</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -45,7 +45,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="img-responsive pull-left" href="/">
-                <img style="max-height: 40px; margin-top: 5px; margin-bottom: 5px;" src="../../assets/img/yetus_logo.png" alt="Apache Yetus logo" />
+                <img style="max-height: 40px; margin-top: 5px; margin-bottom: 5px;" src="/assets/img/buretoolbox_logo.png" alt="Buretoolbox logo" />
             </a>
         </div>
         <div class="navbar-collapse collapse">
@@ -68,13 +68,13 @@
                         </li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="https://issues.apache.org/jira/browse/YETUS"><i class="fa fa-bug"></i> JIRA (Bugs)</a>
                         </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://gitbox.apache.org/repos/asf/yetus.git"><i class="fa fa-code"></i> Source (Apache)</a>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://gitbox.apache.org/repos/asf/buretoolbox.git"><i class="fa fa-code"></i> Source (Apache)</a>
                         </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://github.com/apache/yetus"><i class="fa fa-github-alt"></i> Source (GitHub)</a>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://github.com/apache/buretoolbox"><i class="fa fa-github-alt"></i> Source (GitHub)</a>
                         </li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="/contribute/"><i class="fa fa-code-fork"></i> Contributing</a>
                         </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/ApacheYetus"><i class="fa fa-twitter"></i> @ApacheYetus</a>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/ApacheBuretoolbox"><i class="fa fa-twitter"></i> @ApacheBuretoolbox</a>
                         </li>
                     </ul>
                 </li>
@@ -121,7 +121,7 @@
   under the License.
 -->
 
-<h1 id="maintaining-the-yetus-website">Maintaining the Yetus Website</h1>
+<h1 id="maintaining-the-buretoolbox-website">Maintaining the Buretoolbox Website</h1>
 
 <!-- MarkdownTOC levels="1,2" autolink="true" -->
 
@@ -143,13 +143,13 @@ by reading <a href="https://middlemanapp.com/basics/install/">Middleman's excell
 
 NOTE: You MUST have run `mvn install` at least once prior to running `mvn site`.
 </code></pre></div>
-<p>The following steps assume you have a working ruby 2.3+ environment setup:</p>
+<p>The following steps assume you have a working ruby 2.7+ environment setup:</p>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">sudo </span>gem <span class="nb">install </span>bundler
 <span class="nv">$ </span><span class="nb">cd </span>asf-site-src
 <span class="nv">$ </span>bundle <span class="nb">install</span>
 </code></pre></div>
-<p>and a working Python 2.7 environment for <a href="/documentation/in-progress/releasedocmaker/">releasedocmaker</a>.</p>
+<p>and a working Python 3.8 environment for <a href="/documentation/in-progress/releasedocmaker/">releasedocmaker</a>.</p>
 
 <h2 id="make-changes-in-asf-site-srcsource">Make changes in asf-site-src/source</h2>
 
@@ -164,17 +164,17 @@ vi contribute.html.md
 
 <p>e.g. Precommit changes will be picked up by the Middleman build.</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nb">cd</span> ../precommit/core.d
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">cd</span> ../premerge/core.d
 vi 01-common.sh
 </code></pre></div>
 <h2 id="generating-the-website">Generating the website</h2>
 
-<p>To generate the static website for Apache Yetus run the following command at the root directory:</p>
+<p>To generate the static website for Buretoolbox run the following command at the root directory:</p>
 
 <div class="highlight"><pre class="highlight shell"><code>mvn <span class="nt">--batch-mode</span> <span class="nb">install
 </span>mvn <span class="nt">--batch-mode</span> site site:stage &lt; /dev/null
 </code></pre></div>
-<p>Apache Yetus uses itself to build parts of its website. ('Flying our own airplanes')  This command will first generate a full build of Apache Yetus and create a static website in the <code>asf-site-src/target/site</code> sub directory and a tarball of the site in yetus-dist/target/. You can load it in a web browser, e.g. assuming you are still in the asf-site-src directory on OS X:</p>
+<p>Buretoolbox uses itself to build parts of its website. ('Flying our own airplanes')  This command will first generate a full build of Buretoolbox and create a static website in the <code>asf-site-src/target/site</code> sub directory and a tarball of the site in buretoolbox-dist/target/. You can load it in a web browser, e.g. assuming you are still in the asf-site-src directory on OS X:</p>
 
 <div class="highlight"><pre class="highlight shell"><code>open asf-site-src/target/site/index.html
 </code></pre></div>
@@ -189,19 +189,19 @@ bundle <span class="nb">exec </span>middleman
 </code></pre></div>
 <h2 id="publishing-the-site">Publishing the Site</h2>
 
-<p>Commit the publish directory to the asf-site branch. Presuming we start in a directory that holds your normal Yetus check out:</p>
+<p>Commit the publish directory to the asf-site branch. Presuming we start in a directory that holds your normal Buretoolbox check out:</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>git clone <span class="nt">--single-branch</span> <span class="nt">--branch</span> asf-site https://github.com/apache/yetus.git yetus-site
-<span class="nv">$ </span><span class="c"># Now build in the normal yetus check out</span>
-<span class="nv">$ </span><span class="nb">cd </span>yetus
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>git clone <span class="nt">--single-branch</span> <span class="nt">--branch</span> asf-site https://github.com/apache/buretoolbox.git buretoolbox-site
+<span class="nv">$ </span><span class="c"># Now build in the normal buretoolbox check out</span>
+<span class="nv">$ </span><span class="nb">cd </span>buretoolbox
 <span class="nv">$ </span>git fetch origin
 <span class="nv">$ </span>git checkout main
 <span class="nv">$ </span>git reset <span class="nt">--hard</span> origin/main
 <span class="nv">$ </span>git clean <span class="nt">-xdf</span>
 <span class="nv">$ </span>mvn <span class="nt">--batch-mode</span> <span class="nb">install</span>
 <span class="nv">$ </span>mvn <span class="nt">--batch-mode</span> site site:stage
-<span class="nv">$ </span>rsync <span class="nt">--quiet</span> <span class="nt">--checksum</span> <span class="nt">--inplace</span> <span class="nt">--recursive</span> yetus-dist/target/apache-yetus-<span class="k">${</span><span class="nv">project</span><span class="p">.version</span><span class="k">}</span><span class="nt">-SNAPSHOT-site</span>/ ../../yetus-site/
-<span class="nv">$ </span><span class="nb">cd</span> ../../yetus-site
+<span class="nv">$ </span>rsync <span class="nt">--quiet</span> <span class="nt">--checksum</span> <span class="nt">--inplace</span> <span class="nt">--recursive</span> buretoolbox-dist/target/apache-buretoolbox-<span class="k">${</span><span class="nv">project</span><span class="p">.version</span><span class="k">}</span><span class="nt">-SNAPSHOT-site</span>/ ../../buretoolbox-site/
+<span class="nv">$ </span><span class="nb">cd</span> ../../buretoolbox-site
 <span class="nv">$ </span><span class="c"># check the set of differences</span>
 <span class="nv">$ </span>git add <span class="nt">-p</span>
 <span class="nv">$ </span><span class="c"># Verify any new files are also added</span>
@@ -222,7 +222,7 @@ Documentation changes will be reviewed as they make their way into the main bran
         <div class="row-fluid">
             <div class="span12 text-left">
               <div class="span12">
-                Copyright 2008-2020 <a href="https://www.apache.org/">Apache Software Foundation</a>. Licensed under the <a href="https://www.apache.org/licenses/">Apache License v2.0</a>. Apache Yetus and the Apache feather logo are trademarks of The Apache Software Foundation.
+                Copyright 2008-2020 <a href="https://www.apache.org/">Apache Software Foundation</a>. Licensed under the <a href="https://www.apache.org/licenses/">Apache License v2.0</a>. Buretoolbox and the Apache feather logo are trademarks of The Apache Software Foundation.
               </div>
             </div>
 
